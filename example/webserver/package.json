@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "scripts": {
+    "start": "yarn ts-node -P tsconfig.json server.ts"
+  },
+  "license": "UNLICENCED",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "@types/compression": "^1.7.2",
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.9.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}

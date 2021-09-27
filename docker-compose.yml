@@ -1,0 +1,41 @@
+version: "3"
+services:
+  gateway:
+    build:
+      context: example/gateway
+      dockerfile: Dockerfile
+    volumes:
+      - ./example/gateway/envoy.yaml:/etc/envoy/envoy.yaml
+    networks:
+      envoymesh:
+        aliases:
+          - gateway
+    # Debug Command
+    # command: ["envoy", "-c", "/etc/envoy/envoy.yaml", "-l debug"]
+    expose:
+       - "9000"
+    ports:
+       - "9000:9000"
+       - "8080:8080"
+    depends_on: 
+      - webserver
+
+  webserver:
+    build:
+      context: example/webserver
+      dockerfile: Dockerfile
+    volumes:
+      - ./example/webserver/server.ts:/app/server.ts
+    networks:
+      envoymesh:
+        aliases:
+          - webserver
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+
+networks:
+  envoymesh:
